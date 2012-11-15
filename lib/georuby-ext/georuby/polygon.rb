@@ -58,9 +58,9 @@ class GeoRuby::SimpleFeatures::Polygon
   end
 
   def to_rgeo
-    outer_ring = rings.first.to_rgeo
-    rings.size > 1 ? inner_rings = rings[1..(rings.size - 1)].collect(&:to_rgeo) : inner_rings = nil
-    rgeo_factory.polygon(outer_ring, inner_rings)
+    #outer_ring = rings.first.to_rgeo
+    #rings.size > 1 ? inner_rings = rings[1..(rings.size - 1)].collect(&:to_rgeo) : inner_rings = nil
+    #rgeo_factory.polygon(outer_ring, inner_rings)
   end  
 
   def change(options)
