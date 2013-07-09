@@ -4,13 +4,13 @@ describe GeoRuby::SimpleFeatures::Envelope do
 
   subject { envelope point(0,0), point(1,1) }
 
-  describe "#to_google" do
+  ## describe "#to_google" do
     
-    it "should return an Envelope with Google srid" do
-      subject.to_google.srid.should == 900913
-    end
+  ##   it "should return an Envelope with Google srid" do
+  ##     subject.to_google.srid.should == 900913
+  ##   end
 
-  end
+  ## end
 
   describe "to_polygon" do
     let(:geo_polygon){ polygon(point(0,0), point(0,1), point(1,1), point(1,0), point(0,0))}

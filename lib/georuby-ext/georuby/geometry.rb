@@ -10,13 +10,13 @@ class GeoRuby::SimpleFeatures::Geometry
     srid == 4326
   end
 
-  def to_wgs84
-    project_to 4326
-  end
+  ## def to_wgs84
+  ##   project_to 4326
+  ## end
 
-  def to_google
-    project_to 900913
-  end
+  ## def to_google
+  ##   project_to 900913
+  ## end
 
   def to_geometry
     self

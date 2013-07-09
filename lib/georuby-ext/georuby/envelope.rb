@@ -25,13 +25,13 @@ class GeoRuby::SimpleFeatures::Envelope
 
   alias_method :to_sql, :sql_box
 
-  def to_openlayers
-    OpenLayers::Bounds.new lower_corner.x, lower_corner.y, upper_corner.x, upper_corner.y
-  end
+  # def to_openlayers
+  #   OpenLayers::Bounds.new lower_corner.x, lower_corner.y, upper_corner.x, upper_corner.y
+  # end
 
-  def to_google
-    GeoRuby::SimpleFeatures::Envelope.from_points [lower_corner.to_google, upper_corner.to_google], 900913, with_z
-  end
+  ## def to_google
+  ##   GeoRuby::SimpleFeatures::Envelope.from_points [lower_corner.to_google, upper_corner.to_google], 900913, with_z
+  ## end
 
   def to_polygon
     GeoRuby::SimpleFeatures::Polygon.from_coordinates( [ [ [lower_corner.x, lower_corner.y], [lower_corner.x, upper_corner.y], [upper_corner.x, upper_corner.y], [upper_corner.x, lower_corner.y] ] ] ) 

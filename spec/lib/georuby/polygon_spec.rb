@@ -46,26 +46,26 @@ describe GeoRuby::SimpleFeatures::Polygon do
     end
   end
 
-  describe "#project_to" do
+  ## describe "#project_to" do
 
-    let(:target_srid) { 900913 }
-    subject { polygon("(0 0,1 1,1 0)") }
+  ##  let(:target_srid) { 900913 }
+  ##  subject { polygon("(0 0,1 1,1 0)") }
 
-    it "should project all rings into wgs84" do
-      subject.project_to(target_srid).rings.each_with_index do |ring, index|
-        ring.should == subject[index].project_to(target_srid)
-      end
-    end
+  ##  it "should project all rings into wgs84" do
+  ##    subject.project_to(target_srid).rings.each_with_index do |ring, index|
+  ##      ring.should == subject[index].project_to(target_srid)
+  ##    end
+  ##  end
 
-    it "should have the target srid" do
-      subject.project_to(target_srid).srid.should == target_srid
-    end
+  ##  it "should have the target srid" do
+  ##    subject.project_to(target_srid).srid.should == target_srid
+  ##  end
 
-    it "should not change other attributes" do
-      subject.project_to(target_srid).should have_same(:with_z, :with_m).than(subject)
-    end
+  ##  it "should not change other attributes" do
+  ##    subject.project_to(target_srid).should have_same(:with_z, :with_m).than(subject)
+  ##  end
 
-  end
+  ##end
 
   describe "to_rgeo" do   
 

@@ -36,9 +36,9 @@ class GeoRuby::SimpleFeatures::Point
       (other.respond_to?(:srid) and srid == other.srid) ? (lat == other.lat and lng == other.lng) : (spherical_distance(other) < 10e-3)
   end
 
-  def spherical_distance_with_srid_support(other)
-    to_wgs84.spherical_distance_without_srid_support(other.to_wgs84)
-  end
+  # def spherical_distance_with_srid_support(other)
+  #   to_wgs84.spherical_distance_without_srid_support(other.to_wgs84)
+  # end
   #alias_method_chain :spherical_distance, :srid_support
 
   def endpoint(heading, distance, options={})
@@ -130,31 +130,49 @@ class GeoRuby::SimpleFeatures::Point
     end
   end
 
-  def self.from_lat_lng(object, srid = 4326)
-#    ActiveSupport::Deprecation.warn "Don't use Geokit::LatLng to represent no wgs84 point" unless srid == 4326
+  ## def self.from_lat_lng(object, srid = 4326)
+  ##   ActiveSupport::Deprecation.warn "Don't use Geokit::LatLng to represent no wgs84 point" unless srid == 4326
     
- #   if object.respond_to?(:to_lat_lng)
- #     lat_lng = object.to_lat_lng
- #   else
- #     lat_lng = Geokit::LatLng.normalize object
- #   end
- #   from_x_y lat_lng.lng, lat_lng.lat, srid
-  end
+  ##   if object.respond_to?(:to_lat_lng)
+  ##     lat_lng = object.to_lat_lng
+  ##   else
+  ##     lat_lng = Geokit::LatLng.normalize object
+  ##   end
+  ##   from_x_y lat_lng.lng, lat_lng.lat, srid
+  ## end
 
-  def to_lat_lng
-  #  Geokit::LatLng.new y, x
-  end
+  ## def to_lat_lng
+  ##   Geokit::LatLng.new y, x
+  ## end
 
-  def projection
- #   Proj4::Projection.for_srid srid
+  ## def projection
+  ##   Proj4::Projection.for_srid srid
+  ## end
+
+  ## def project_to(target_srid)
+  ##   return self if srid == target_srid
+
+  ##   self.class.from_pro4j projection.transform(Proj4::Projection.for_srid(target_srid), to_proj4.x, to_proj4.y), target_srid
+  ## end
+
+  ## def to_proj4(ratio = nil)
+  ##   # Proj4 use radian instead of degres
+  ##   ratio ||= (wgs84? ? Proj4::DEG_TO_RAD : 1.0)
+  ##   Proj4::Point.new x * ratio, y * ratio
+  ## end
+
+  ## def self.from_pro4j(point, srid, ratio = nil)
+  ##   ratio ||= (srid == 4326 ? Proj4::RAD_TO_DEG : 1.0)
+  ##   from_x_y point.x * ratio, point.y * ratio, srid
+  ## end
+
+  def to_rgeo
+    rgeo_factory.point x, y
   end
   
-  def project_to(target_srid)
-    return self if srid == target_srid
-
-#    self.class.from_pro4j projection.transform(Proj4::Projection.for_srid(target_srid), to_proj4.x, to_proj4.y), target_srid
+  def to_openlayers
+    OpenLayers::LonLat.new x, y
   end
-
 
   # Fixes original bounding_box which creates points without srid
   def bounding_box

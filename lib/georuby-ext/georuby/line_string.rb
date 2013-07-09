@@ -18,10 +18,10 @@ class GeoRuby::SimpleFeatures::LineString
     change :points => points.reverse
   end
 
-  def project_to(target_srid)
-    return self if srid == target_srid
-    change :points => points.map { |point| point.project_to(target_srid) }, :srid => target_srid
-  end
+  ## def project_to(target_srid)
+  ##   return self if srid == target_srid
+  ##   change :points => points.map { |point| point.project_to(target_srid) }, :srid => target_srid
+  ## end
 
   def self.merge(lines)
     # FIXME flatten.uniq can break crossing lines
